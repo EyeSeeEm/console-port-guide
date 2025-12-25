@@ -291,6 +291,46 @@
             overflow-x: auto;
         }
 
+        /* Collapsible sections */
+        details {
+            margin: 1rem 0;
+        }
+
+        details summary {
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details summary::before {
+            content: '\25B6';
+            font-size: 0.75rem;
+            transition: transform 0.2s;
+        }
+
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        details summary:hover {
+            color: var(--secondary);
+        }
+
+        details > div {
+            padding-top: 1rem;
+        }
+
         footer {
             margin-top: 4rem;
             padding-top: 2rem;
@@ -337,90 +377,8 @@
                 <div class="stat-label">Dev kits (all platforms)</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">~€8M</div>
+                <div class="stat-value">~8M</div>
                 <div class="stat-label">Max German funding</div>
-            </div>
-        </div>
-
-        <!-- Quick Comparison - MOVED TO TOP -->
-        <h2>Quick Comparison</h2>
-
-        <div class="comparison-table">
-            <table>
-                <tr>
-                    <th>Feature</th>
-                    <th><a href="#xbox">Xbox ID@Xbox</a></th>
-                    <th><a href="#playstation">PlayStation Partners</a></th>
-                    <th><a href="#nintendo">Nintendo</a></th>
-                    <th><a href="#german-funding">German Funding</a></th>
-                </tr>
-                <tr>
-                    <td><strong>Direct Funding</strong></td>
-                    <td><span class="tag tag-success">Yes</span> (DAP, Game Pass)</td>
-                    <td><span class="tag tag-warning">Limited</span></td>
-                    <td><span class="tag tag-danger">No</span></td>
-                    <td><span class="tag tag-success">Yes</span> (25-50%)</td>
-                </tr>
-                <tr>
-                    <td><strong>Free Dev Kit</strong></td>
-                    <td><span class="tag tag-success">2 free</span></td>
-                    <td><span class="tag tag-success">1+1 loan</span></td>
-                    <td><span class="tag tag-warning">~$600</span></td>
-                    <td>N/A</td>
-                </tr>
-                <tr>
-                    <td><strong>Individual OK</strong></td>
-                    <td><span class="tag tag-warning">Company preferred</span></td>
-                    <td><span class="tag tag-danger">Company required</span></td>
-                    <td><span class="tag tag-success">Yes</span></td>
-                    <td><span class="tag tag-danger">Company required</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Review Time</strong></td>
-                    <td>10-15 business days</td>
-                    <td>Varies</td>
-                    <td>Varies</td>
-                    <td>Submission deadlines</td>
-                </tr>
-                <tr>
-                    <td><strong>Platform Fee</strong></td>
-                    <td>30%</td>
-                    <td>30%</td>
-                    <td>30%</td>
-                    <td>N/A</td>
-                </tr>
-                <tr>
-                    <td><strong>Best For</strong></td>
-                    <td>Seeking funding/Game Pass</td>
-                    <td>AAA presentation value</td>
-                    <td>Easy entry, family games</td>
-                    <td>German studios, €300K+ projects</td>
-                </tr>
-            </table>
-        </div>
-
-        <!-- Getting Started Checklist - MOVED TO TOP -->
-        <h2>Getting Started Checklist</h2>
-
-        <div class="grid-2">
-            <div class="card">
-                <h4>Immediate Actions</h4>
-                <ul>
-                    <li>Register for <a href="#xbox">ID@Xbox</a> (<a href="https://developer.microsoft.com/en-US/games/publish/id/welcome" target="_blank">Apply Here</a>)</li>
-                    <li>Register for <a href="#playstation">PlayStation Partners</a> (<a href="https://partners.playstation.net" target="_blank">Apply Here</a>)</li>
-                    <li>Register for <a href="#nintendo">Nintendo Developer Portal</a> (<a href="https://developer.nintendo.com/register" target="_blank">Apply Here</a>)</li>
-                    <li>Prepare game pitch deck (trailer, screenshots, description)</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h4>Before Submitting</h4>
-                <ul>
-                    <li>Have playable demo or vertical slice ready</li>
-                    <li>Document sales/wishlist numbers if available</li>
-                    <li>Prepare realistic timeline and budget</li>
-                    <li>Consider target audience overlap with platform</li>
-                    <li>Review <a href="#porting">self-funded porting costs</a> as backup</li>
-                </ul>
             </div>
         </div>
 
@@ -437,53 +395,61 @@
 
             <p>ID@Xbox is Microsoft's program for independent developers to self-publish on Xbox and PC. Since launch, <strong>$5 billion has been paid to developers</strong>, with over 1,000 games released in the last year alone.</p>
 
-            <h4>What You Can Get</h4>
-            <table>
-                <tr>
-                    <th>Benefit</th>
-                    <th>Details</th>
-                </tr>
-                <tr>
-                    <td>Development Kits</td>
-                    <td><strong>2 free dev kits</strong> upon approval</td>
-                </tr>
-                <tr>
-                    <td>Porting Funding</td>
-                    <td><strong>Non-recoupable funding</strong> to offset porting costs (Developer Acceleration Program)</td>
-                </tr>
-                <tr>
-                    <td>Game Pass Deals</td>
-                    <td><strong>Flat licensing fee</strong> + engagement-based royalties. Example: Cooking Simulator received $600,000</td>
-                </tr>
-                <tr>
-                    <td>Update Fees</td>
-                    <td><strong>None</strong> - no fees for game updates</td>
-                </tr>
-            </table>
+            <details>
+                <summary>What You Can Get</summary>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Benefit</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Development Kits</td>
+                            <td><strong>2 free dev kits</strong> upon approval</td>
+                        </tr>
+                        <tr>
+                            <td>Porting Funding</td>
+                            <td><strong>Non-recoupable funding</strong> to offset porting costs (Developer Acceleration Program)</td>
+                        </tr>
+                        <tr>
+                            <td>Game Pass Deals</td>
+                            <td><strong>Flat licensing fee</strong> + engagement-based royalties. Example: Cooking Simulator received $600,000</td>
+                        </tr>
+                        <tr>
+                            <td>Update Fees</td>
+                            <td><strong>None</strong> - no fees for game updates</td>
+                        </tr>
+                    </table>
+                </div>
+            </details>
 
-            <h4>Application Timeline</h4>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 1: Register</span>
-                    <p>Create Microsoft account, submit studio info and introduction</p>
+            <details>
+                <summary>Application Timeline</summary>
+                <div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 1: Register</span>
+                            <p>Create Microsoft account, submit studio info and introduction</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 2: NDA (20 min - 3 days)</span>
+                            <p>Receive and sign mutual NDA</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 3: Submit Game Concept</span>
+                            <p>Describe your game for policy/standards review</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 4: Trust & Safety Review (10-15 business days)</span>
+                            <p>Xbox reviews your submission</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 5: Approval & Agreements</span>
+                            <p>Sign Title Licensing Agreement (TLA) and GDK Agreement</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 2: NDA (20 min - 3 days)</span>
-                    <p>Receive and sign mutual NDA</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 3: Submit Game Concept</span>
-                    <p>Describe your game for policy/standards review</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 4: Trust & Safety Review (10-15 business days)</span>
-                    <p>Xbox reviews your submission</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 5: Approval & Agreements</span>
-                    <p>Sign Title Licensing Agreement (TLA) and GDK Agreement</p>
-                </div>
-            </div>
+            </details>
 
             <div class="highlight-box">
                 <strong>Developer Acceleration Program:</strong> Extra support for underrepresented creators (Black, Indigenous, Latino, LGBTQIA+, women, developers with disabilities, emerging markets). Offers non-recoupable prototype and porting funding with no exclusivity or equity requirements.
@@ -514,53 +480,61 @@
 
             <p>PlayStation Partners provides access to development tools, free hardware loans, and the PlayStation Indies initiative. While Sony offers less direct funding than Xbox, they provide significant hardware and promotional support.</p>
 
-            <h4>What You Can Get</h4>
-            <table>
-                <tr>
-                    <th>Benefit</th>
-                    <th>Details</th>
-                </tr>
-                <tr>
-                    <td>Development Hardware</td>
-                    <td><strong>1 free PS5 dev kit + 1 test kit</strong> (2-year loan)</td>
-                </tr>
-                <tr>
-                    <td>Development Tools</td>
-                    <td>Full SDK access after registration</td>
-                </tr>
-                <tr>
-                    <td>Store Promotion</td>
-                    <td>Available but may cost $25,000+ for premium placement</td>
-                </tr>
-                <tr>
-                    <td>Direct Funding</td>
-                    <td>Limited - case-by-case for partnership opportunities</td>
-                </tr>
-            </table>
+            <details>
+                <summary>What You Can Get</summary>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Benefit</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Development Hardware</td>
+                            <td><strong>1 free PS5 dev kit + 1 test kit</strong> (2-year loan)</td>
+                        </tr>
+                        <tr>
+                            <td>Development Tools</td>
+                            <td>Full SDK access after registration</td>
+                        </tr>
+                        <tr>
+                            <td>Store Promotion</td>
+                            <td>Available but may cost $25,000+ for premium placement</td>
+                        </tr>
+                        <tr>
+                            <td>Direct Funding</td>
+                            <td>Limited - case-by-case for partnership opportunities</td>
+                        </tr>
+                    </table>
+                </div>
+            </details>
 
-            <h4>Application Process</h4>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 1: Register as Partner</span>
-                    <p>Apply at partners.playstation.net as a legal entity (corporation/company required)</p>
+            <details>
+                <summary>Application Timeline</summary>
+                <div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 1: Register as Partner</span>
+                            <p>Apply at partners.playstation.net as a legal entity (corporation/company required)</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 2: Sign GDPA</span>
+                            <p>Global Developer and Publisher Agreement</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 3: Submit Game Concept</span>
+                            <p>Include project plan and game description</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 4: Concept Approval</span>
+                            <p>Wait for approval to access full tools</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 5: Request Hardware</span>
+                            <p>Apply for complimentary dev kit and test kit</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 2: Sign GDPA</span>
-                    <p>Global Developer and Publisher Agreement</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 3: Submit Game Concept</span>
-                    <p>Include project plan and game description</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 4: Concept Approval</span>
-                    <p>Wait for approval to access full tools</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 5: Request Hardware</span>
-                    <p>Apply for complimentary dev kit and test kit</p>
-                </div>
-            </div>
+            </details>
 
             <div class="highlight-box">
                 <strong>Tip:</strong> PlayStation recommends sharing a playable build early - they're used to seeing games in early development. Check <a href="https://sonyinteractive.com/en/news/blog/how-to-pitch-your-game-to-playstation/" target="_blank">their pitch guide</a> for what makes a good fit.
@@ -590,57 +564,65 @@
 
             <p>Nintendo is the most accessible platform for newcomers - <strong>no prior experience required</strong>, individuals can register (no company needed), and home offices are accepted. However, Nintendo explicitly does not fund indie games directly.</p>
 
-            <h4>What You Can Get</h4>
-            <table>
-                <tr>
-                    <th>Benefit</th>
-                    <th>Details</th>
-                </tr>
-                <tr>
-                    <td>Registration & Tools</td>
-                    <td><strong>Completely free</strong></td>
-                </tr>
-                <tr>
-                    <td>Development Kit</td>
-                    <td><strong>~$600</strong> (purchase, not loaned)</td>
-                </tr>
-                <tr>
-                    <td>Age Rating (Digital)</td>
-                    <td><strong>Free via IARC</strong> for digital-only titles</td>
-                </tr>
-                <tr>
-                    <td>Direct Funding</td>
-                    <td><strong>None</strong> - "We don't have a Pub Fund type of thing"</td>
-                </tr>
-                <tr>
-                    <td>Marketing Support</td>
-                    <td>Promotional amplification available, not guaranteed</td>
-                </tr>
-            </table>
+            <details>
+                <summary>What You Can Get</summary>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Benefit</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Registration & Tools</td>
+                            <td><strong>Completely free</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Development Kit</td>
+                            <td><strong>~$600</strong> (purchase, not loaned)</td>
+                        </tr>
+                        <tr>
+                            <td>Age Rating (Digital)</td>
+                            <td><strong>Free via IARC</strong> for digital-only titles</td>
+                        </tr>
+                        <tr>
+                            <td>Direct Funding</td>
+                            <td><strong>None</strong> - "We don't have a Pub Fund type of thing"</td>
+                        </tr>
+                        <tr>
+                            <td>Marketing Support</td>
+                            <td>Promotional amplification available, not guaranteed</td>
+                        </tr>
+                    </table>
+                </div>
+            </details>
 
-            <h4>Application Process</h4>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 1: Register</span>
-                    <p>Free registration, individual or company (must be legal age of majority)</p>
+            <details>
+                <summary>Application Timeline</summary>
+                <div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 1: Register</span>
+                            <p>Free registration, individual or company (must be legal age of majority)</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 2: Sign Agreements</span>
+                            <p>Accept NDA and Terms of Service</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 3: Request Switch Access</span>
+                            <p>Fill out Switch Access Request form with development experience and project info</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 4: Purchase Dev Kit</span>
+                            <p>Buy development hardware (~$600, retail games don't work on it)</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 5: Develop & Submit</span>
+                            <p>Complete game, get age rating, submit for Nintendo review</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 2: Sign Agreements</span>
-                    <p>Accept NDA and Terms of Service</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 3: Request Switch Access</span>
-                    <p>Fill out Switch Access Request form with development experience and project info</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 4: Purchase Dev Kit</span>
-                    <p>Buy development hardware (~$600, retail games don't work on it)</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 5: Develop & Submit</span>
-                    <p>Complete game, get age rating, submit for Nintendo review</p>
-                </div>
-            </div>
+            </details>
 
             <div class="highlight-box">
                 <strong>Nintendo Quote:</strong> "We don't want to send out an assumption that if you bring out content on the eShop that you're automatically entitled to success. Any developer has to create their own success. But we're there to help amplify that." - Damon Baker, Nintendo of America
@@ -660,7 +642,32 @@
             </div>
         </div>
 
-        <!-- German Funding Section -->
+        <!-- Getting Started Checklist - MOVED BELOW PROGRAMS -->
+        <h2>Getting Started Checklist</h2>
+
+        <div class="grid-2">
+            <div class="card">
+                <h4>Immediate Actions</h4>
+                <ul>
+                    <li>Register for <a href="#xbox">ID@Xbox</a> (<a href="https://developer.microsoft.com/en-US/games/publish/id/welcome" target="_blank">Apply Here</a>)</li>
+                    <li>Register for <a href="#playstation">PlayStation Partners</a> (<a href="https://partners.playstation.net" target="_blank">Apply Here</a>)</li>
+                    <li>Register for <a href="#nintendo">Nintendo Developer Portal</a> (<a href="https://developer.nintendo.com/register" target="_blank">Apply Here</a>)</li>
+                    <li>Prepare game pitch deck (trailer, screenshots, description)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Before Submitting</h4>
+                <ul>
+                    <li>Have playable demo or vertical slice ready</li>
+                    <li>Document sales/wishlist numbers if available</li>
+                    <li>Prepare realistic timeline and budget</li>
+                    <li>Consider target audience overlap with platform</li>
+                    <li>Review <a href="#porting">self-funded porting costs</a> as backup</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Government Grants Section -->
         <h2>Government Grants</h2>
 
         <div class="card" id="german-funding">
@@ -670,74 +677,86 @@
                 <span class="tag tag-success">Non-Repayable Grant</span>
             </div>
 
-            <p>Germany's federal games funding program provides <strong>non-repayable grants of up to 50%</strong> for game development. Since 2019, <strong>over 640 projects have received €220+ million</strong> in total funding. Applications reopened December 30, 2024 after a 20-month freeze.</p>
+            <p>Germany's federal games funding program provides <strong>non-repayable grants of up to 50%</strong> for game development. Since 2019, <strong>over 640 projects have received 220+ million</strong> in total funding. Applications reopened December 30, 2024 after a 20-month freeze.</p>
 
-            <h4>Funding Amounts</h4>
-            <table>
-                <tr>
-                    <th>Category</th>
-                    <th>Details</th>
-                </tr>
-                <tr>
-                    <td>Minimum Project Volume</td>
-                    <td><strong>€300,000</strong></td>
-                </tr>
-                <tr>
-                    <td>Maximum Funding</td>
-                    <td><strong>€2 million</strong> (standard) / <strong>€8 million</strong> (large projects)</td>
-                </tr>
-                <tr>
-                    <td>Large Companies</td>
-                    <td>Up to <strong>25%</strong> of eligible costs</td>
-                </tr>
-                <tr>
-                    <td>SMEs (&lt;250 employees, &lt;€50M turnover)</td>
-                    <td>Up to <strong>45%</strong> of eligible costs</td>
-                </tr>
-                <tr>
-                    <td>Startups (&lt;3 years old)</td>
-                    <td>Up to <strong>50%</strong> of eligible costs (+5% bonus)</td>
-                </tr>
-            </table>
+            <details>
+                <summary>Funding Amounts</summary>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Category</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Minimum Project Volume</td>
+                            <td><strong>300,000</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Maximum Funding</td>
+                            <td><strong>2 million</strong> (standard) / <strong>8 million</strong> (large projects)</td>
+                        </tr>
+                        <tr>
+                            <td>Large Companies</td>
+                            <td>Up to <strong>25%</strong> of eligible costs</td>
+                        </tr>
+                        <tr>
+                            <td>SMEs (&lt;250 employees, &lt;50M turnover)</td>
+                            <td>Up to <strong>45%</strong> of eligible costs</td>
+                        </tr>
+                        <tr>
+                            <td>Startups (&lt;3 years old)</td>
+                            <td>Up to <strong>50%</strong> of eligible costs (+5% bonus)</td>
+                        </tr>
+                    </table>
+                </div>
+            </details>
 
-            <h4>Key Requirements</h4>
-            <ul>
-                <li><strong>German presence required:</strong> Registered office, permanent establishment, or branch in Germany</li>
-                <li><strong>Cultural test:</strong> Game must pass EU cultural test based on content and cultural background</li>
-                <li><strong>Age rating:</strong> USK label required for all public builds (even Steam/trade shows)</li>
-                <li><strong>Accessibility:</strong> Must include low-barrier options (subtitles, font sizes, etc.)</li>
-                <li><strong>No dark patterns:</strong> Gambling simulation and manipulative designs excluded</li>
-                <li><strong>Own funds:</strong> At least 50% of costs must come from company resources</li>
-                <li><strong>Mandatory consultation:</strong> Must consult with DLR project agency before applying</li>
-                <li><strong>Project not started:</strong> Cannot fund work already begun (unless "early start" approved)</li>
-            </ul>
+            <details>
+                <summary>Key Requirements</summary>
+                <div>
+                    <ul>
+                        <li><strong>German presence required:</strong> Registered office, permanent establishment, or branch in Germany</li>
+                        <li><strong>Cultural test:</strong> Game must pass EU cultural test based on content and cultural background</li>
+                        <li><strong>Age rating:</strong> USK label required for all public builds (even Steam/trade shows)</li>
+                        <li><strong>Accessibility:</strong> Must include low-barrier options (subtitles, font sizes, etc.)</li>
+                        <li><strong>No dark patterns:</strong> Gambling simulation and manipulative designs excluded</li>
+                        <li><strong>Own funds:</strong> At least 50% of costs must come from company resources</li>
+                        <li><strong>Mandatory consultation:</strong> Must consult with DLR project agency before applying</li>
+                        <li><strong>Project not started:</strong> Cannot fund work already begun (unless "early start" approved)</li>
+                    </ul>
+                </div>
+            </details>
 
-            <h4>Application Process</h4>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 1: Consultation with DLR</span>
-                    <p>Mandatory preliminary discussion with project agency (required before application)</p>
+            <details>
+                <summary>Application Timeline</summary>
+                <div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 1: Consultation with DLR</span>
+                            <p>Mandatory preliminary discussion with project agency (required before application)</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 2: Prepare Documentation</span>
+                            <p>Project description, financing plan, SME declaration, cultural test, submission checklist</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 3: Submit via easy-Online</span>
+                            <p>Digital-only submission. Next deadline: December 31, 2025</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 4: Evaluation</span>
+                            <p>Based on innovation, creativity, cultural test, economic viability, team qualifications</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-step">Step 5: Project Start</span>
+                            <p>Projects can start from October 1, 2025 (or earlier with approved exemption)</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 2: Prepare Documentation</span>
-                    <p>Project description, financing plan, SME declaration, cultural test, submission checklist</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 3: Submit via easy-Online</span>
-                    <p>Digital-only submission. Next deadline: December 31, 2025</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 4: Evaluation</span>
-                    <p>Based on innovation, creativity, cultural test, economic viability, team qualifications</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-step">Step 5: Project Start</span>
-                    <p>Projects can start from October 1, 2025 (or earlier with approved exemption)</p>
-                </div>
-            </div>
+            </details>
 
             <div class="highlight-box">
-                <strong>Note:</strong> Projects up to €900,000 are funded by BKM (Federal Cultural Commissioner). Projects exceeding this go to BMWK (Federal Ministry for Economic Affairs). Projects extending beyond 2025 cannot yet be funded from BMWK funds, but applications can be submitted.
+                <strong>Note:</strong> Projects up to 900,000 are funded by BKM (Federal Cultural Commissioner). Projects exceeding this go to BMWK (Federal Ministry for Economic Affairs). Projects extending beyond 2025 cannot yet be funded from BMWK funds, but applications can be submitted.
             </div>
 
             <div style="margin-top: 1.5rem;">
@@ -748,106 +767,172 @@
 
             <div class="source">
                 Sources:
-                <a href="https://haerting.de/en/insights/games-funding-2025-application-requirements/" target="_blank">HÄRTING - 2025 Requirements</a> |
+                <a href="https://haerting.de/en/insights/games-funding-2025-application-requirements/" target="_blank">HRTING - 2025 Requirements</a> |
                 <a href="https://gamecity-hamburg.de/news/application-open-for-german-federal-computer-game-funding/" target="_blank">Gamecity Hamburg</a> |
                 <a href="https://www.game.de/en/german-games-funding/" target="_blank">game Verband</a> |
                 <a href="https://www.gamingdeputy.com/games-funding-2025-new-applications-possible-from-december-30th/" target="_blank">Gaming Deputy</a>
             </div>
         </div>
 
-        <!-- Porting Costs Section -->
+        <!-- Quick Comparison - MOVED TO BOTTOM -->
+        <h2>Quick Comparison</h2>
+
+        <div class="comparison-table">
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th><a href="#xbox">Xbox ID@Xbox</a></th>
+                    <th><a href="#playstation">PlayStation Partners</a></th>
+                    <th><a href="#nintendo">Nintendo</a></th>
+                    <th><a href="#german-funding">German Funding</a></th>
+                </tr>
+                <tr>
+                    <td><strong>Direct Funding</strong></td>
+                    <td><span class="tag tag-success">Yes</span> (DAP, Game Pass)</td>
+                    <td><span class="tag tag-warning">Limited</span></td>
+                    <td><span class="tag tag-danger">No</span></td>
+                    <td><span class="tag tag-success">Yes</span> (25-50%)</td>
+                </tr>
+                <tr>
+                    <td><strong>Free Dev Kit</strong></td>
+                    <td><span class="tag tag-success">2 free</span></td>
+                    <td><span class="tag tag-success">1+1 loan</span></td>
+                    <td><span class="tag tag-warning">~$600</span></td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td><strong>Review Time</strong></td>
+                    <td>10-15 business days</td>
+                    <td>Varies</td>
+                    <td>Varies</td>
+                    <td>Submission deadlines</td>
+                </tr>
+                <tr>
+                    <td><strong>Platform Fee</strong></td>
+                    <td>30%</td>
+                    <td>30%</td>
+                    <td>30%</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td><strong>Best For</strong></td>
+                    <td>Seeking funding/Game Pass</td>
+                    <td>AAA presentation value</td>
+                    <td>Easy entry, family games</td>
+                    <td>German studios, 300K+ projects</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Porting Costs Section - MOVED TO VERY BOTTOM -->
         <h2>Self-Funded Porting</h2>
 
         <div class="card" id="porting">
             <h3>Console Porting Costs & Timeline</h3>
             <p>If platform funding isn't available, here's what to expect for self-funded console ports.</p>
 
-            <h4>Cost Estimates</h4>
-            <table>
-                <tr>
-                    <th>Scope</th>
-                    <th>Cost Range</th>
-                    <th>Timeline</th>
-                </tr>
-                <tr>
-                    <td>Small indie to one platform</td>
-                    <td>Mid five-figures ($30K-$60K)</td>
-                    <td>3-4 months</td>
-                </tr>
-                <tr>
-                    <td>Indie to next-gen (PS5/XSX)</td>
-                    <td>Upper five-figures</td>
-                    <td>~2 months</td>
-                </tr>
-                <tr>
-                    <td>Indie to multiple platforms</td>
-                    <td>Low six-figures</td>
-                    <td>4-6 months</td>
-                </tr>
-                <tr>
-                    <td>Complex/AAA games</td>
-                    <td>Low seven-figures</td>
-                    <td>10+ months</td>
-                </tr>
-            </table>
-
-            <h4>Factors Affecting Cost</h4>
-            <ul>
-                <li><strong>Platform similarity:</strong> PC ↔ Xbox is cheaper (similar architecture); PS/Nintendo costs more</li>
-                <li><strong>Game engine:</strong> Unity/Unreal have better multi-platform support than proprietary engines</li>
-                <li><strong>Combined ports:</strong> PS4+PS5 together = ~4 months (vs. 5 months separate)</li>
-            </ul>
-
-            <h4>Payment Models</h4>
-            <div class="grid-2">
-                <div class="highlight-box">
-                    <strong>One-Time Fee</strong><br>
-                    Pay upfront for development. You keep all revenue.
+            <details>
+                <summary>Cost Estimates</summary>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Scope</th>
+                            <th>Cost Range</th>
+                            <th>Timeline</th>
+                        </tr>
+                        <tr>
+                            <td>Small indie to one platform</td>
+                            <td>Mid five-figures ($30K-$60K)</td>
+                            <td>3-4 months</td>
+                        </tr>
+                        <tr>
+                            <td>Indie to next-gen (PS5/XSX)</td>
+                            <td>Upper five-figures</td>
+                            <td>~2 months</td>
+                        </tr>
+                        <tr>
+                            <td>Indie to multiple platforms</td>
+                            <td>Low six-figures</td>
+                            <td>4-6 months</td>
+                        </tr>
+                        <tr>
+                            <td>Complex/AAA games</td>
+                            <td>Low seven-figures</td>
+                            <td>10+ months</td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="highlight-box">
-                    <strong>Revenue Share</strong><br>
-                    Reduced/no upfront cost. Studio takes ongoing percentage.
-                </div>
-            </div>
+            </details>
 
-            <h4>Porting Studios</h4>
-            <table>
-                <tr>
-                    <th>Studio</th>
-                    <th>Specialties</th>
-                    <th>Link</th>
-                </tr>
-                <tr>
-                    <td>BlitWorks</td>
-                    <td>Top indie porter, all platforms</td>
-                    <td><a href="https://blitworks.com" target="_blank">blitworks.com</a></td>
-                </tr>
-                <tr>
-                    <td>Abstraction Games</td>
-                    <td>Virtuos studio, 200+ SKUs shipped</td>
-                    <td><a href="https://abstraction.games" target="_blank">abstraction.games</a></td>
-                </tr>
-                <tr>
-                    <td>Klabater</td>
-                    <td>24 PS ports, 23 Xbox, 15 Switch</td>
-                    <td><a href="https://klabater.com/video-game-porting/" target="_blank">klabater.com</a></td>
-                </tr>
-                <tr>
-                    <td>Catness Games</td>
-                    <td>All major platforms</td>
-                    <td><a href="https://catnessgames.com/game-porting-service/" target="_blank">catnessgames.com</a></td>
-                </tr>
-                <tr>
-                    <td>Noble Robot</td>
-                    <td>Rev-share option available</td>
-                    <td><a href="https://noblerobot.com/porting-publishing" target="_blank">noblerobot.com</a></td>
-                </tr>
-                <tr>
-                    <td>PolyCrunch Games</td>
-                    <td>Unity/GameMaker specialists</td>
-                    <td><a href="https://polycrunch.games/console-porting-for-indies/" target="_blank">polycrunch.games</a></td>
-                </tr>
-            </table>
+            <details>
+                <summary>Factors Affecting Cost</summary>
+                <div>
+                    <ul>
+                        <li><strong>Platform similarity:</strong> PC to Xbox is cheaper (similar architecture); PS/Nintendo costs more</li>
+                        <li><strong>Game engine:</strong> Unity/Unreal have better multi-platform support than proprietary engines</li>
+                        <li><strong>Combined ports:</strong> PS4+PS5 together = ~4 months (vs. 5 months separate)</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>Payment Models</summary>
+                <div>
+                    <div class="grid-2">
+                        <div class="highlight-box">
+                            <strong>One-Time Fee</strong><br>
+                            Pay upfront for development. You keep all revenue.
+                        </div>
+                        <div class="highlight-box">
+                            <strong>Revenue Share</strong><br>
+                            Reduced/no upfront cost. Studio takes ongoing percentage.
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details open>
+                <summary>Porting Studios</summary>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Studio</th>
+                            <th>Specialties</th>
+                            <th>Link</th>
+                        </tr>
+                        <tr>
+                            <td>BlitWorks</td>
+                            <td>Top indie porter, all platforms</td>
+                            <td><a href="https://blitworks.com" target="_blank">blitworks.com</a></td>
+                        </tr>
+                        <tr>
+                            <td>Abstraction Games</td>
+                            <td>Virtuos studio, 200+ SKUs shipped</td>
+                            <td><a href="https://abstraction.games" target="_blank">abstraction.games</a></td>
+                        </tr>
+                        <tr>
+                            <td>Klabater</td>
+                            <td>24 PS ports, 23 Xbox, 15 Switch</td>
+                            <td><a href="https://klabater.com/video-game-porting/" target="_blank">klabater.com</a></td>
+                        </tr>
+                        <tr>
+                            <td>Catness Games</td>
+                            <td>All major platforms</td>
+                            <td><a href="https://catnessgames.com/game-porting-service/" target="_blank">catnessgames.com</a></td>
+                        </tr>
+                        <tr>
+                            <td>Noble Robot</td>
+                            <td>Rev-share option available</td>
+                            <td><a href="https://noblerobot.com/porting-publishing" target="_blank">noblerobot.com</a></td>
+                        </tr>
+                        <tr>
+                            <td>PolyCrunch Games</td>
+                            <td>Unity/GameMaker specialists</td>
+                            <td><a href="https://polycrunch.games/console-porting-for-indies/" target="_blank">polycrunch.games</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </details>
 
             <div class="source">
                 Sources:
