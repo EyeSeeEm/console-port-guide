@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galactic Glitch - Console Port Action Plan</title>
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --bg: #0f0a1a;
+            --bg-card: #1a1025;
+            --bg-card-hover: #251535;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #3b2d4d;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --xbox: #107c10;
+            --playstation: #003791;
+            --nintendo: #e60012;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-top: 0.5rem; }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        h3 { font-size: 1.2rem; color: var(--secondary); margin: 1.5rem 0 0.75rem; }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .card:hover { background: var(--bg-card-hover); }
+
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--bg); color: var(--primary); font-weight: 600; }
+
+        a { color: var(--primary); text-decoration: none; }
+        a:hover { color: var(--secondary); text-decoration: underline; }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0.25rem;
+            transition: all 0.2s;
+        }
+
+        .btn-xbox { background: var(--xbox); color: white; }
+        .btn-playstation { background: var(--playstation); color: white; }
+        .btn-nintendo { background: var(--nintendo); color: white; }
+        .btn-german { background: #ffcc00; color: #000; }
+        .btn:hover { opacity: 0.9; text-decoration: none; transform: translateY(-1px); }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .tag-success { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+        .tag-warning { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+        .tag-danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+        }
+
+        .pitch-point {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 3px solid var(--success);
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .action-priority {
+            background: var(--danger);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .action-priority.medium { background: var(--warning); }
+        .action-priority.low { background: var(--secondary); }
+
+        .quote {
+            font-style: italic;
+            color: var(--text-muted);
+            border-left: 2px solid var(--accent);
+            padding-left: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .quote-author { color: var(--accent); font-style: normal; }
+
+        ul { margin: 1rem 0; padding-left: 1.5rem; }
+        li { margin: 0.4rem 0; }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            h1 { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Galactic Glitch Console Port Plan</h1>
+            <p class="subtitle">Action plan for getting platform funding or self-funding console ports</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Last Updated: December 26, 2025</p>
+        </header>
+
+        <!-- Game Stats -->
+        <h2>📊 Current Game Status</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--success);">88%</div>
+                <div class="stat-label">Very Positive (622)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--success);">93%</div>
+                <div class="stat-label">Recent Reviews</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">~20K</div>
+                <div class="stat-label">Copies Sold</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">8K</div>
+                <div class="stat-label">Steam Followers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">5:42</div>
+                <div class="stat-label">Avg Playtime</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--warning);">⏳</div>
+                <div class="stat-label">Steam Deck Pending</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <table>
+                <tr><th>Detail</th><th>Value</th></tr>
+                <tr><td>Steam URL</td><td><a href="https://store.steampowered.com/app/1536620/Galactic_Glitch/" target="_blank">store.steampowered.com/app/1536620</a></td></tr>
+                <tr><td>1.0 Release</td><td>June 3, 2025</td></tr>
+                <tr><td>Price</td><td>€12.99 / $12.99 USD</td></tr>
+                <tr><td>Engine</td><td>Unity</td></tr>
+                <tr><td>Controller Support</td><td>Full (Steam Deck pending verification)</td></tr>
+                <tr><td>Languages</td><td>English, Simplified Chinese</td></tr>
+                <tr><td>Development Time</td><td>10+ years</td></tr>
+            </table>
+        </div>
+
+        <!-- Pitch Angles -->
+        <h2>🎯 Your Pitch Angles</h2>
+        <div class="card">
+            <p style="margin-bottom: 1rem;">These are your strongest arguments for platform funding:</p>
+
+            <div class="pitch-point">
+                <strong>🇺🇦 Ukrainian Team Story</strong> — ~50% of developers are Ukrainian, some working from Ukraine during the war. Crunchy Leaf donates portion of profits to humanitarian relief. <em>(This worked for Hollow Home's $150K Xbox deal!)</em>
+            </div>
+
+            <div class="pitch-point">
+                <strong>⚡ Physics Innovation</strong> — Not just another twin-stick shooter. Unique gravity gun mechanic lets you grab asteroids, catch missiles mid-flight, and weaponize debris.
+            </div>
+
+            <div class="pitch-point">
+                <strong>⭐ Strong Reviews</strong> — 88% Very Positive overall, 93% recent. Comparable to top roguelikes on Steam.
+            </div>
+
+            <div class="pitch-point">
+                <strong>🎮 Controller-Ready</strong> — Full controller support already implemented. Steam Deck verification in progress.
+            </div>
+
+            <div class="pitch-point">
+                <strong>📺 Influencer Validation</strong> — Major roguelike YouTubers love it:
+            </div>
+
+            <div class="quote">"Congratulations! It's an absolute 10/10 for you." <span class="quote-author">— Retromation</span></div>
+            <div class="quote">"Holy shit, is it good!" <span class="quote-author">— Wanderbots</span></div>
+            <div class="quote">"One of the dopest games I've played in a while" <span class="quote-author">— Olexa</span></div>
+        </div>
+
+        <!-- IMMEDIATE ACTIONS -->
+        <h2>🔥 IMMEDIATE ACTIONS (This Week)</h2>
+
+        <div class="action-item">
+            <span class="action-priority">URGENT</span>
+            <div>
+                <strong>Register for ID@Xbox</strong><br>
+                <a href="https://developer.microsoft.com/en-US/games/publish/id/welcome" target="_blank" class="btn btn-xbox">Apply Now →</a>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">You are NOT registered. NDA comes within 3 days. Best funding option.</p>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <span class="action-priority">URGENT</span>
+            <div>
+                <strong>Register for PlayStation Partners</strong><br>
+                <a href="https://partners.playstation.net" target="_blank" class="btn btn-playstation">Register Now →</a>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">You are NOT registered. Free dev kit + test kit (2-year loan). Twin-stick shooters work well on PS.</p>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <span class="action-priority medium">MEDIUM</span>
+            <div>
+                <strong>Register for Nintendo Developer Portal</strong><br>
+                <a href="https://developer.nintendo.com/register" target="_blank" class="btn btn-nintendo">Register Now →</a>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">You are NOT registered. Dev kit costs ~$600 (purchase). Lower priority but worth having access.</p>
+            </div>
+        </div>
+
+        <!-- Platform Comparison -->
+        <h2>📋 Platform Options at a Glance</h2>
+        <div class="card">
+            <table>
+                <tr>
+                    <th>Platform</th>
+                    <th>Free Dev Kit?</th>
+                    <th>Direct Funding?</th>
+                    <th>Fit for GG</th>
+                </tr>
+                <tr>
+                    <td><strong style="color: var(--xbox);">Xbox ID@Xbox</strong></td>
+                    <td><span class="tag tag-success">2 Free</span></td>
+                    <td><span class="tag tag-success">Yes - DAP</span></td>
+                    <td><span class="tag tag-success">Strong</span> Ukrainian angle</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: var(--playstation);">PlayStation</strong></td>
+                    <td><span class="tag tag-success">1+1 Loan</span></td>
+                    <td><span class="tag tag-warning">Limited</span></td>
+                    <td><span class="tag tag-success">Strong</span> Twin-stick genre</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: var(--nintendo);">Nintendo</strong></td>
+                    <td><span class="tag tag-warning">~$600</span></td>
+                    <td><span class="tag tag-danger">None</span></td>
+                    <td><span class="tag tag-warning">Moderate</span></td>
+                </tr>
+                <tr>
+                    <td><strong style="color: #ffcc00;">🇩🇪 German Funding</strong></td>
+                    <td>N/A</td>
+                    <td><span class="tag tag-success">Up to 45%</span></td>
+                    <td><span class="tag tag-success">Eligible</span> as German GmbH</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Xbox Section -->
+        <h2 style="color: var(--xbox);">Xbox ID@Xbox — Best Funding Option</h2>
+        <div class="card">
+            <div class="highlight-box">
+                <strong>Why Xbox is your best bet:</strong> The Developer Acceleration Program offers non-recoupable funding for porting. Hollow Home (similar Ukrainian angle) got $150K. Your Steam Deck verification + Ukrainian team story could work.
+            </div>
+
+            <h3>What You Can Get</h3>
+            <ul>
+                <li><strong>2 free dev kits</strong> upon approval</li>
+                <li><strong>Porting funding</strong> via Developer Acceleration Program (no payback required)</li>
+                <li><strong>Game Pass deals</strong> — flat fee + royalties (example: Cooking Simulator got $600K)</li>
+            </ul>
+
+            <h3>Application Timeline</h3>
+            <ol style="padding-left: 1.5rem;">
+                <li>Register & submit studio info</li>
+                <li>Sign NDA (comes within 3 days)</li>
+                <li>Submit game concept for review</li>
+                <li>Trust & Safety review (10-15 business days)</li>
+                <li>If approved: sign agreements, request dev kits</li>
+                <li>Submit pitch for Developer Acceleration Program</li>
+            </ol>
+
+            <div style="margin-top: 1.5rem;">
+                <a href="https://developer.microsoft.com/en-US/games/publish/id/welcome" class="btn btn-xbox" target="_blank">Start Registration →</a>
+            </div>
+        </div>
+
+        <!-- German Funding -->
+        <h2 style="color: #ffcc00;">🇩🇪 German Federal Funding — Backup Option</h2>
+        <div class="card">
+            <div class="highlight-box">
+                <strong>Crunchy Leaf Games GmbH is eligible!</strong><br>
+                As a German SME (not a startup), you qualify for up to <strong>45% funding</strong> on projects €300K+.
+            </div>
+
+            <h3>Your Eligibility</h3>
+            <table>
+                <tr><td>German GmbH</td><td><span class="tag tag-success">✓ Yes</span> (HRB 167547 B, Berlin)</td></tr>
+                <tr><td>SME Status</td><td><span class="tag tag-success">✓ Yes</span> (&lt;250 employees)</td></tr>
+                <tr><td>Startup Bonus</td><td><span class="tag tag-danger">✗ No</span> (company &gt;3 years old)</td></tr>
+                <tr><td>Max Funding Rate</td><td><strong>45%</strong></td></tr>
+            </table>
+
+            <h3>Example Calculation</h3>
+            <table>
+                <tr><th>Project Cost</th><th>Funding (45%)</th><th>Self-Fund</th></tr>
+                <tr><td>€300,000</td><td>€135,000</td><td>€165,000</td></tr>
+                <tr><td>€500,000</td><td>€225,000</td><td>€275,000</td></tr>
+            </table>
+
+            <h3>Requirements</h3>
+            <ul>
+                <li><strong>Mandatory consultation</strong> with DLR project agency before applying</li>
+                <li>Minimum project volume: €300,000</li>
+                <li>USK age rating required for public builds</li>
+                <li>Must pass "culture test"</li>
+                <li>Project cannot have started (unless "early start" approved)</li>
+            </ul>
+
+            <div style="margin-top: 1.5rem;">
+                <a href="https://www.bundeswirtschaftsministerium.de/Redaktion/DE/Artikel/Wirtschaft/Games/computerspielefoerderung-des-bundes.html" class="btn btn-german" target="_blank">Official Page (German) →</a>
+                <a href="https://projekttraeger.dlr.de/en/references/promoting-progress-in-the-computer-games-industry" class="btn" style="background: var(--bg-card); border: 1px solid var(--border);" target="_blank">DLR Contact →</a>
+            </div>
+        </div>
+
+        <!-- Budget Scenarios -->
+        <h2>💰 Budget Scenarios</h2>
+        <div class="card">
+            <table>
+                <tr>
+                    <th>Scenario</th>
+                    <th>External Funding</th>
+                    <th>Self-Fund</th>
+                    <th>Notes</th>
+                </tr>
+                <tr style="background: rgba(34, 197, 94, 0.1);">
+                    <td><strong>Best Case</strong></td>
+                    <td>$100-150K from Xbox</td>
+                    <td>$0</td>
+                    <td>Similar to Hollow Home deal</td>
+                </tr>
+                <tr>
+                    <td><strong>Good Case</strong></td>
+                    <td>€135K German funding</td>
+                    <td>€165K</td>
+                    <td>45% of €300K project</td>
+                </tr>
+                <tr>
+                    <td><strong>Backup</strong></td>
+                    <td>Free dev kits only</td>
+                    <td>$50-100K</td>
+                    <td>AI-assisted porting, your budget</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Resources -->
+        <h2>🔗 Quick Links</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>Your Assets</h3>
+                <ul>
+                    <li><a href="https://store.steampowered.com/app/1536620/Galactic_Glitch/" target="_blank">Steam Page</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=dhHk0VEsie4" target="_blank">1.0 Launch Trailer</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=KpzshE3a3ZI" target="_blank">Early Access Trailer</a></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Platform Portals</h3>
+                <ul>
+                    <li><a href="https://developer.microsoft.com/en-US/games/publish/id/welcome" target="_blank">ID@Xbox Registration</a></li>
+                    <li><a href="https://partners.playstation.net" target="_blank">PlayStation Partners</a></li>
+                    <li><a href="https://developer.nintendo.com/register" target="_blank">Nintendo Developer</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Porting Contacts (Already Reached Out to You)</h3>
+            <table>
+                <tr><th>Company</th><th>Contact</th><th>Last Contact</th></tr>
+                <tr><td>No Gravity Games</td><td>anna@nogravitygames.com</td><td>Oct 2023</td></tr>
+                <tr><td>Porttato</td><td>business@porttato.com</td><td>Aug 2025</td></tr>
+                <tr><td>404 Games</td><td>helen.vetrov@404games.net</td><td>Sep 2024</td></tr>
+            </table>
+        </div>
+
+        <footer>
+            <p>Generated for Crunchy Leaf Games — December 2025</p>
+            <p>Based on research from Hollow Home's Microsoft deal and platform documentation</p>
+        </footer>
+    </div>
+</body>
+</html>
